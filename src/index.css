@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --sonu-burgundy: #5e1933;
+    --sonu-burgundy-dark: #3f0e21;
+    --sonu-burgundy-deep: #2d0917;
+    --sonu-cream: #faf3ec;
+    --sonu-cream-warm: #f4e8dc;
+    --sonu-gold: #d4af6a;
+    --sonu-gold-light: #e7c98f;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    background-color: #faf3ec;
+    color: #2b1820;
+  }
+
+  h1, h2, h3, h4, .font-serif-luxury {
+    font-family: var(--font-serif);
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
