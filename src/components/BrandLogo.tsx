@@ -42,7 +42,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
         )}
       </div>
       <span
-        className={`font-serif-luxury text-base sm:text-xl lg:text-2xl font-bold tracking-tight transition-colors ${
+        className={`font-serif-luxury text-sm sm:text-lg lg:text-xl font-bold tracking-tight transition-colors ${
           isLight
             ? 'text-[#f7e7ce] group-hover:text-white'
             : 'text-[#4a1228] group-hover:text-[#5e1933]'

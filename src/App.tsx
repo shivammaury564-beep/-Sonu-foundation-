@@ -4,7 +4,6 @@ import {
   ArrowRight,
   Menu,
   X,
-  Crown,
   Leaf,
   ShieldCheck,
   GraduationCap,
@@ -23,6 +22,8 @@ import {
   Info,
   ChevronDown,
   HeartHandshake,
+  Monitor,
+  Award,
 } from 'lucide-react';
 import { BrandLogo } from './components/BrandLogo';
 import { FoundationAndCoursesSection } from './components/FoundationAndCoursesSection';
@@ -37,7 +38,7 @@ import {
   INITIAL_LOCATIONS,
   StudioLocation,
   BRAND_CONTACT,
-  TRAINING_COURSES,
+  FOUNDATION_COURSES,
 } from './data/catalogData';
 import {
   STANDARD_TIME_SLOTS,
@@ -77,7 +78,7 @@ export default function App() {
   const [selectedServiceId, setSelectedServiceId] = useState<string>(POPULAR_SERVICES[0].id);
   const [quickDate, setQuickDate] = useState<string>(getTomorrowKolkata());
   const [quickTime, setQuickTime] = useState<string>('11:00 AM');
-  const [selectedCourseId, setSelectedCourseId] = useState<string>(TRAINING_COURSES[0].id);
+  const [selectedCourseId, setSelectedCourseId] = useState<string>(FOUNDATION_COURSES[0].id);
 
   // Full 36-Service Catalog Filter + Detail Modal
   const [serviceFilter, setServiceFilter] = useState<ServiceCategoryFilter>('All Services');
@@ -151,22 +152,23 @@ export default function App() {
       setSubscribedMessage('Please enter a valid email address.');
       return;
     }
-    setSubscribedMessage('Thank you for subscribing to seasonal salon offers & batch updates!');
+    setSubscribedMessage('Thank you for subscribing to Foundation program & salon updates!');
     setSubscriberEmail('');
   };
 
   return (
     <div id="home" className="min-h-screen flex flex-col bg-[#faf3ec] text-[#2b1820]">
-      {/* TOP PROMOTIONAL ANNOUNCEMENT BAR */}
+      {/* TOP NGO & SKILL DEVELOPMENT ANNOUNCEMENT BAR */}
       <div className="bg-[#52142b] text-[#f7e7ce] text-xs sm:text-sm py-2 px-4 text-center font-medium border-b border-[#d4af6a]/25">
         <span>
-          Book Your Appointment Today &amp; Get 10% OFF on Your First Service!
+          Sonu Foundation and Charitable Trust · Vocational Skill Programs in Beauty Training,
+          Stitching &amp; Tailoring, and Computer Classes · Vadodara
         </span>
       </div>
 
-      {/* MAIN NAVIGATION HEADER (3-Zone Contract: Brand — Nav Links with Dropdowns — Primary CTA) */}
+      {/* MAIN NAVIGATION HEADER (NGO Primary Identity + Beauty Studio & Academy Division) */}
       <header className="sticky top-0 z-40 bg-[#faf3ec]/95 backdrop-blur-md border-b border-[#e5d3c0]">
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-6">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3">
           <BrandLogo
             variant="dark-text"
             label="Sonu Foundation and Charitable Trust"
@@ -175,7 +177,7 @@ export default function App() {
 
           <nav
             aria-label="Primary Navigation"
-            className="hidden lg:flex items-center gap-5 text-sm font-medium text-[#3f0e21]"
+            className="hidden xl:flex items-center gap-3.5 text-[13px] font-medium text-[#3f0e21]"
           >
             <a
               href="#home"
@@ -185,101 +187,40 @@ export default function App() {
             </a>
 
             <a
-              href="#about"
+              href="#about-foundation"
               className="hover:text-[#5e1933] transition-colors whitespace-nowrap shrink-0"
             >
-              About Us
+              About Foundation
             </a>
 
-            {/* Services Dropdown */}
-            <div className="relative group py-2">
-              <a
-                href="#services"
-                className="inline-flex items-center gap-1 hover:text-[#5e1933] transition-colors whitespace-nowrap shrink-0"
-              >
-                <span>Services</span>
-                <ChevronDown className="w-3.5 h-3.5 text-[#7c2344]" />
-              </a>
-              <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-150 absolute left-0 top-full w-60 rounded-xl bg-[#faf3ec] border border-[#dec5ac] shadow-lg p-2 z-50">
-                <a
-                  href="#services"
-                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
-                >
-                  Featured Beauty Services
-                </a>
-                <a
-                  href="#services-pricing"
-                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
-                >
-                  Services &amp; Pricing Catalog (36 Services)
-                </a>
-              </div>
-            </div>
+            <a
+              href="#our-mission"
+              className="hover:text-[#5e1933] transition-colors whitespace-nowrap shrink-0"
+            >
+              Our Mission
+            </a>
 
-            {/* Academy Dropdown */}
+            {/* Our Programs Dropdown */}
             <div className="relative group py-2">
               <a
-                href="#academy"
+                href="#our-programs"
                 className="inline-flex items-center gap-1 hover:text-[#5e1933] transition-colors whitespace-nowrap shrink-0"
               >
-                <span>Academy</span>
+                <span>Our Programs</span>
                 <ChevronDown className="w-3.5 h-3.5 text-[#7c2344]" />
               </a>
               <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-150 absolute left-0 top-full w-64 rounded-xl bg-[#faf3ec] border border-[#dec5ac] shadow-lg p-2 z-50">
-                <a
-                  href="#academy"
-                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
-                >
-                  Beauty Academy Overview
-                </a>
-                <a
-                  href="#professional-courses"
-                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
-                >
-                  Professional Courses (9 Confirmed)
-                </a>
-                <a
-                  href="#certificates"
-                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
-                >
-                  Certificates &amp; Recognition
-                </a>
-                <a
-                  href="#course-enquiry"
-                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
-                >
-                  Course Enquiry Form
-                </a>
-              </div>
-            </div>
-
-            {/* Foundation Dropdown */}
-            <div className="relative group py-2">
-              <a
-                href="#foundation"
-                className="inline-flex items-center gap-1 hover:text-[#5e1933] transition-colors whitespace-nowrap shrink-0"
-              >
-                <span>Foundation</span>
-                <ChevronDown className="w-3.5 h-3.5 text-[#7c2344]" />
-              </a>
-              <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-150 absolute left-0 top-full w-64 rounded-xl bg-[#faf3ec] border border-[#dec5ac] shadow-lg p-2 z-50">
-                <a
-                  href="#foundation"
-                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
-                >
-                  Sonu Foundation &amp; Charitable Trust
-                </a>
                 <a
                   href="#our-programs"
                   className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
                 >
-                  Our Programs
+                  All Foundation Programs
                 </a>
                 <a
                   href="#beauty-classes"
                   className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
                 >
-                  Beauty Classes
+                  Beauty Training Classes
                 </a>
                 <a
                   href="#stitching-classes"
@@ -291,54 +232,103 @@ export default function App() {
                   href="#computer-classes"
                   className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
                 >
-                  Computer Classes
+                  Computer Education Classes
                 </a>
+                <a
+                  href="#course-enquiry"
+                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
+                >
+                  Program Admission Enquiry
+                </a>
+              </div>
+            </div>
+
+            {/* Achievements & Stories Dropdown */}
+            <div className="relative group py-2">
+              <a
+                href="#student-stories"
+                className="inline-flex items-center gap-1 hover:text-[#5e1933] transition-colors whitespace-nowrap shrink-0"
+              >
+                <span>Stories &amp; Events</span>
+                <ChevronDown className="w-3.5 h-3.5 text-[#7c2344]" />
+              </a>
+              <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-150 absolute left-0 top-full w-64 rounded-xl bg-[#faf3ec] border border-[#dec5ac] shadow-lg p-2 z-50">
                 <a
                   href="#student-stories"
                   className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
                 >
                   Student Success Stories
                 </a>
-              </div>
-            </div>
-
-            {/* Gallery Dropdown */}
-            <div className="relative group py-2">
-              <a
-                href="#gallery"
-                className="inline-flex items-center gap-1 hover:text-[#5e1933] transition-colors whitespace-nowrap shrink-0"
-              >
-                <span>Gallery</span>
-                <ChevronDown className="w-3.5 h-3.5 text-[#7c2344]" />
-              </a>
-              <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-150 absolute left-0 top-full w-56 rounded-xl bg-[#faf3ec] border border-[#dec5ac] shadow-lg p-2 z-50">
                 <a
-                  href="#gallery"
+                  href="#achievements"
                   className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
                 >
-                  Studio &amp; Work Gallery
+                  Achievements &amp; Outcomes
                 </a>
                 <a
-                  href="#student-gallery"
+                  href="#events"
                   className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
                 >
-                  Student Gallery (11 Categories)
+                  Events &amp; Training Activities
                 </a>
                 <a
-                  href="#reviews"
+                  href="#certificates"
                   className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
                 >
-                  Client &amp; Trainee Reviews
+                  Certificates &amp; Recognition
                 </a>
               </div>
             </div>
 
             <a
-              href="#locations"
+              href="#gallery"
               className="hover:text-[#5e1933] transition-colors whitespace-nowrap shrink-0"
             >
-              Our Locations
+              Gallery
             </a>
+
+            {/* Sonu's Beauty Studio & Academy Division Dropdown */}
+            <div className="relative group py-2">
+              <a
+                href="#academy"
+                className="inline-flex items-center gap-1 hover:text-[#5e1933] transition-colors whitespace-nowrap shrink-0"
+              >
+                <span>Studio &amp; Academy</span>
+                <ChevronDown className="w-3.5 h-3.5 text-[#7c2344]" />
+              </a>
+              <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-150 absolute right-0 top-full w-68 rounded-xl bg-[#faf3ec] border border-[#dec5ac] shadow-lg p-2 z-50">
+                <a
+                  href="#academy"
+                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
+                >
+                  Sonu&apos;s Beauty Academy Overview
+                </a>
+                <a
+                  href="#professional-courses"
+                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
+                >
+                  9 Confirmed Academy Courses
+                </a>
+                <a
+                  href="#services"
+                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
+                >
+                  Beauty Studio Services
+                </a>
+                <a
+                  href="#services-pricing"
+                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
+                >
+                  Complete 36-Service Salon Menu
+                </a>
+                <a
+                  href="#locations"
+                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
+                >
+                  Our Two Studio Branches
+                </a>
+              </div>
+            </div>
 
             <a
               href="#contact"
@@ -348,13 +338,13 @@ export default function App() {
             </a>
           </nav>
 
-          <div className="flex items-center gap-2.5 shrink-0">
+          <div className="flex items-center gap-2 shrink-0">
             <a
-              href="#appointment-booking"
-              className="hidden sm:inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg bg-[#651b38] hover:bg-[#4a1228] text-white text-xs sm:text-sm font-semibold shadow-xs transition-colors whitespace-nowrap shrink-0"
+              href="#course-enquiry"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-[#651b38] hover:bg-[#4a1228] text-white text-xs sm:text-sm font-semibold shadow-xs transition-colors whitespace-nowrap shrink-0"
             >
-              <Calendar className="w-4 h-4" />
-              <span>Book Appointment</span>
+              <GraduationCap className="w-4 h-4" />
+              <span>Join Programs</span>
             </a>
 
             <button
@@ -362,7 +352,7 @@ export default function App() {
               onClick={() => setMobileMenuOpen((prev) => !prev)}
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={mobileMenuOpen}
-              className="lg:hidden p-2 rounded-lg border border-[#d8c0a8] text-[#3f0e21] hover:bg-[#efe1d1] cursor-pointer"
+              className="xl:hidden p-2 rounded-lg border border-[#d8c0a8] text-[#3f0e21] hover:bg-[#efe1d1] cursor-pointer"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -372,27 +362,26 @@ export default function App() {
         {mobileMenuOpen && (
           <nav
             aria-label="Mobile Navigation"
-            className="lg:hidden bg-[#faf3ec] border-b border-[#e5d3c0] px-4 pt-3 pb-5 grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-[80vh] overflow-y-auto"
+            className="xl:hidden bg-[#faf3ec] border-b border-[#e5d3c0] px-4 pt-3 pb-5 grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-[80vh] overflow-y-auto"
           >
             {[
               { label: '1. Home', href: '#home' },
-              { label: '2. About Us', href: '#about' },
-              { label: '3. Beauty Services', href: '#services' },
-              { label: '4. Services & Pricing (36 Services)', href: '#services-pricing' },
-              { label: '5. Beauty Academy', href: '#academy' },
-              { label: '6. Professional Courses (9 Courses)', href: '#professional-courses' },
-              { label: '7. Sonu Foundation & Charitable Trust', href: '#foundation' },
-              { label: '8. Our Programs', href: '#our-programs' },
-              { label: '9. Beauty Classes', href: '#beauty-classes' },
-              { label: '10. Stitching Classes', href: '#stitching-classes' },
-              { label: '11. Computer Classes', href: '#computer-classes' },
-              { label: '12. Student Gallery', href: '#student-gallery' },
-              { label: '13. Student Success Stories', href: '#student-stories' },
-              { label: '14. Reviews', href: '#reviews' },
-              { label: '15. Our Locations (Branch 1 & 2)', href: '#locations' },
-              { label: '16. Contact', href: '#contact' },
-              { label: '17. Appointment Booking', href: '#appointment-booking' },
-              { label: '18. Course Enquiry', href: '#course-enquiry' },
+              { label: '2. About Foundation', href: '#about-foundation' },
+              { label: '3. Our Mission & Vision', href: '#our-mission' },
+              { label: '4. Our Programs (All 3 Tracks)', href: '#our-programs' },
+              { label: '5. Beauty Training Classes', href: '#beauty-classes' },
+              { label: '6. Stitching & Tailoring Classes', href: '#stitching-classes' },
+              { label: '7. Computer Education Classes', href: '#computer-classes' },
+              { label: '8. Student Success Stories', href: '#student-stories' },
+              { label: '9. Achievements & Outcomes', href: '#achievements' },
+              { label: '10. Events & Training Activities', href: '#events' },
+              { label: '11. Student & Event Gallery', href: '#gallery' },
+              { label: "12. Sonu's Beauty Academy (9 Courses)", href: '#professional-courses' },
+              { label: "13. Sonu's Beauty Studio (36 Services)", href: '#services-pricing' },
+              { label: '14. Our Two Locations (Branch 1 & 2)', href: '#locations' },
+              { label: '15. Program & Course Enquiry', href: '#course-enquiry' },
+              { label: '16. Salon Appointment Booking', href: '#appointment-booking' },
+              { label: '17. Contact Us', href: '#contact' },
             ].map((item) => (
               <a
                 key={item.href + item.label}
@@ -408,107 +397,199 @@ export default function App() {
       </header>
 
       <main className="flex-1">
-        {/* HERO SECTION (Strictly Preserving Reference Design) */}
+        {/* =====================================================================
+            SAATH-INSPIRED NGO HERO SECTION (SONU FOUNDATION & CHARITABLE TRUST)
+            ===================================================================== */}
         <section className="relative overflow-hidden bg-gradient-to-r from-[#f5e7d8] via-[#f2e2d2] to-[#ead5c0] border-b border-[#e2cbb3]">
-          <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-14">
+          <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-5 z-10">
-                <p className="text-xs sm:text-sm font-medium tracking-[0.22em] uppercase text-[#6e3b4b] mb-3">
-                  Beauty · Care · Training
-                </p>
+              <div className="lg:col-span-6 z-10">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#5e1933]/10 border border-[#5e1933]/25 text-xs font-semibold uppercase tracking-widest text-[#5e1933] mb-4">
+                  <HeartHandshake className="w-3.5 h-3.5" />
+                  <span>Sonu Foundation and Charitable Trust · Vadodara</span>
+                </div>
 
-                <h1 className="font-serif-luxury text-4xl sm:text-5xl lg:text-[52px] font-bold leading-[1.12] text-[#28121a] mb-4">
-                  Enhance Your
-                  <span className="block text-[#6b1b3a] mt-1">Natural Beauty</span>
+                <h1 className="font-serif-luxury text-4xl sm:text-5xl lg:text-[50px] font-bold leading-[1.12] text-[#28121a] mb-4">
+                  Empowering Lives Through
+                  <span className="block text-[#6b1b3a] mt-1">
+                    Skill Development &amp; Training
+                  </span>
                 </h1>
 
-                <p className="text-base sm:text-lg text-[#432731] font-medium max-w-xl mb-7 leading-relaxed">
-                  Professional Salon Services &amp; Certified Beauty Courses – All Under One Roof,
-                  alongside vocational training programs by{' '}
+                <p className="text-base sm:text-lg text-[#432731] font-medium max-w-2xl mb-6 leading-relaxed">
+                  <strong>Sonu Foundation and Charitable Trust</strong> is dedicated to practical
+                  livelihood education through hands-on{' '}
                   <strong className="text-[#5e1933]">
-                    Sonu Foundation and Charitable Trust
+                    Beauty Training, Stitching &amp; Tailoring Classes, and Computer Education
                   </strong>
-                  .
+                  —supported by our professional salon and academy division,{' '}
+                  <strong>Sonu&apos;s Beauty Studio &amp; Academy</strong>.
                 </p>
 
-                <div className="flex flex-wrap items-center gap-4 mb-8">
+                {/* Three Prominent Foundation Program Highlight Badges */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-7">
                   <a
-                    href="#appointment-booking"
-                    className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-lg bg-[#651b38] hover:bg-[#4a1228] text-white text-sm sm:text-base font-semibold shadow-sm transition-colors whitespace-nowrap shrink-0"
+                    href="#beauty-classes"
+                    className="p-3 rounded-xl bg-[#faf3ec]/90 hover:bg-white border border-[#d8bc9e] transition-colors flex items-start gap-2.5"
                   >
-                    <Calendar className="w-4 h-4" />
-                    <span>Book Appointment</span>
+                    <Sparkles className="w-4 h-4 text-[#7c2344] shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs font-bold text-[#3f0e21]">Beauty Training</p>
+                      <p className="text-[11px] text-[#684752]">Practical Salon Skills</p>
+                    </div>
+                  </a>
+
+                  <a
+                    href="#stitching-classes"
+                    className="p-3 rounded-xl bg-[#faf3ec]/90 hover:bg-white border border-[#d8bc9e] transition-colors flex items-start gap-2.5"
+                  >
+                    <Scissors className="w-4 h-4 text-[#7c2344] shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs font-bold text-[#3f0e21]">Stitching Classes</p>
+                      <p className="text-[11px] text-[#684752]">Tailoring &amp; Garments</p>
+                    </div>
+                  </a>
+
+                  <a
+                    href="#computer-classes"
+                    className="p-3 rounded-xl bg-[#faf3ec]/90 hover:bg-white border border-[#d8bc9e] transition-colors flex items-start gap-2.5"
+                  >
+                    <Monitor className="w-4 h-4 text-[#7c2344] shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs font-bold text-[#3f0e21]">Computer Classes</p>
+                      <p className="text-[11px] text-[#684752]">MS Office &amp; Digital Skills</p>
+                    </div>
+                  </a>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3.5">
+                  <a
+                    href="#our-programs"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#651b38] hover:bg-[#4a1228] text-white text-sm font-semibold shadow-sm transition-colors whitespace-nowrap shrink-0"
+                  >
+                    <span>Explore Foundation Programs</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+
+                  <a
+                    href="#course-enquiry"
+                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-lg border border-[#651b38]/50 bg-[#faf3ec]/80 hover:bg-[#faf3ec] text-[#3f0e21] text-sm font-semibold transition-colors whitespace-nowrap shrink-0"
+                  >
+                    <GraduationCap className="w-4 h-4 text-[#651b38]" />
+                    <span>Enquire for Admission</span>
                   </a>
 
                   <a
                     href="#services"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg border border-[#651b38]/50 bg-[#faf3ec]/70 hover:bg-[#faf3ec] text-[#3f0e21] text-sm sm:text-base font-semibold transition-colors whitespace-nowrap shrink-0"
+                    className="inline-flex items-center gap-1.5 px-4 py-3.5 rounded-lg text-[#5e1933] hover:underline text-sm font-semibold whitespace-nowrap shrink-0"
                   >
-                    <span>Explore Services</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <span>Visit Beauty Studio &amp; Academy</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </a>
-                </div>
-
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-5 border-t border-[#dcc4ac]">
-                  <div className="text-center sm:text-left">
-                    <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#d4af6a]/25 text-[#8a5d1b] mb-1">
-                      <Crown className="w-4 h-4" />
-                    </div>
-                    <p className="text-xs font-bold text-[#2b1820]">Expert Professionals</p>
-                    <p className="text-[11px] text-[#684752]">Trained &amp; Certified</p>
-                  </div>
-
-                  <div className="text-center sm:text-left">
-                    <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#d4af6a]/25 text-[#8a5d1b] mb-1">
-                      <Leaf className="w-4 h-4" />
-                    </div>
-                    <p className="text-xs font-bold text-[#2b1820]">Premium Products</p>
-                    <p className="text-[11px] text-[#684752]">Safe &amp; Skin-Friendly</p>
-                  </div>
-
-                  <div className="text-center sm:text-left">
-                    <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#d4af6a]/25 text-[#8a5d1b] mb-1">
-                      <ShieldCheck className="w-4 h-4" />
-                    </div>
-                    <p className="text-xs font-bold text-[#2b1820]">Hygiene &amp; Safety</p>
-                    <p className="text-[11px] text-[#684752]">Our Top Priority</p>
-                  </div>
-
-                  <div className="text-center sm:text-left">
-                    <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#d4af6a]/25 text-[#8a5d1b] mb-1">
-                      <GraduationCap className="w-4 h-4" />
-                    </div>
-                    <p className="text-xs font-bold text-[#2b1820]">Beauty Academy</p>
-                    <p className="text-[11px] text-[#684752]">Learn · Practice · Grow</p>
-                  </div>
                 </div>
               </div>
 
-              <div className="lg:col-span-7 relative">
-                <div className="rounded-2xl overflow-hidden border border-[#d4af6a]/60 shadow-md bg-[#ebd7c3] aspect-[855/316] w-full">
-                  <img
-                    src="/assets/sonu/hero-banner.png"
-                    alt="Sonu's Beauty Studio & Academy Bridal Makeover and Reception"
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-center"
-                  />
+              {/* Right Column: Real Training, Classroom & Studio Visual Showcase */}
+              <div className="lg:col-span-6">
+                <div className="bg-[#faf3ec] p-3.5 sm:p-4 rounded-2xl border border-[#d4af6a]/60 shadow-md">
+                  <div className="rounded-xl overflow-hidden border border-[#e2cbb3] bg-[#ebd7c3] aspect-[855/316] w-full mb-3">
+                    <img
+                      src="/assets/sonu/hero-banner.png"
+                      alt="Sonu Foundation & Sonu's Beauty Studio and Academy"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-center"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="rounded-xl overflow-hidden border border-[#e2cbb3] bg-[#f4e8dc]">
+                      <div className="aspect-[16/10] w-full overflow-hidden">
+                        <img
+                          src="/assets/sonu/service-threading.png"
+                          alt="Beauty Skill Training Practice"
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover object-center"
+                        />
+                      </div>
+                      <div className="p-2 text-center">
+                        <p className="text-[11px] font-bold text-[#3f0e21]">Beauty Training</p>
+                      </div>
+                    </div>
+
+                    <div className="rounded-xl overflow-hidden border border-[#e2cbb3] bg-[#f4e8dc]">
+                      <div className="aspect-[16/10] w-full overflow-hidden">
+                        <img
+                          src="/assets/sonu/salon-interior.png"
+                          alt="Stitching & Classroom Environment"
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover object-center"
+                        />
+                      </div>
+                      <div className="p-2 text-center">
+                        <p className="text-[11px] font-bold text-[#3f0e21]">
+                          Stitching &amp; Tailoring
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="rounded-xl overflow-hidden border border-[#e2cbb3] bg-[#f4e8dc]">
+                      <div className="aspect-[16/10] w-full overflow-hidden">
+                        <img
+                          src="/assets/sonu/hero-reception.png"
+                          alt="Computer Classes & Training Desk"
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover object-center"
+                        />
+                      </div>
+                      <div className="p-2 text-center">
+                        <p className="text-[11px] font-bold text-[#3f0e21]">Computer Classes</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* SECTION A: OUR POPULAR SERVICES + BEAUTY ACADEMY CARD + COMPLETE 36-SERVICE CATALOG */}
-        <section id="services" className="py-12 sm:py-16 bg-[#faf3ec] scroll-mt-24">
+        {/* =====================================================================
+            SONU FOUNDATION & CHARITABLE TRUST (PRIMARY SECTIONS)
+            + SONU'S BEAUTY ACADEMY (9 PROFESSIONAL COURSES)
+            + UNIFIED COURSE & PROGRAM ENQUIRY FORM
+            ===================================================================== */}
+        <FoundationAndCoursesSection
+          locations={activeLocations}
+          selectedCourseId={selectedCourseId}
+          onSelectCourseForEnquiry={(courseId) => setSelectedCourseId(courseId)}
+        />
+
+        {/* =====================================================================
+            SONU'S BEAUTY STUDIO & ACADEMY — SALON SERVICES & PRICING SECTION
+            ===================================================================== */}
+        <section
+          id="services"
+          className="py-14 sm:py-18 bg-[#faf3ec] border-t border-[#e5d3c0] scroll-mt-24"
+        >
           <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-8">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#7c2344] mb-1">
+                Professional Salon Division · Sonu&apos;s Beauty Studio &amp; Academy
+              </p>
+              <h2 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#3f0e21]">
+                Sonu&apos;s Beauty Studio — Salon Services
+              </h2>
+              <p className="text-sm sm:text-base text-[#563843] mt-1">
+                Professional salon care across Hair, Makeup, Skin, Waxing, Hairstyles, and Nail
+                Extensions at our two Vadodara studio branches.
+              </p>
+            </div>
+
             <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-stretch">
               <div className="xl:col-span-9 flex flex-col justify-between">
-                <div className="flex items-center justify-center gap-4 mb-6">
-                  <div className="h-px w-16 sm:w-28 bg-[#d5bda4]" />
-                  <h2 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#2b1820] text-center">
-                    Our Popular Services
-                  </h2>
-                  <div className="h-px w-16 sm:w-28 bg-[#d5bda4]" />
+                <div className="flex items-center justify-between gap-4 mb-4">
+                  <h3 className="font-serif-luxury text-xl sm:text-2xl font-bold text-[#2b1820]">
+                    Featured Popular Salon Services
+                  </h3>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
@@ -531,9 +612,9 @@ export default function App() {
                         </div>
 
                         <div className="p-3.5">
-                          <h3 className="font-serif-luxury text-sm font-bold text-[#2b1820] leading-snug mb-1">
+                          <h4 className="font-serif-luxury text-sm font-bold text-[#2b1820] leading-snug mb-1">
                             {service.name}
-                          </h3>
+                          </h4>
                           <p className="text-[11px] text-[#5c3c47] leading-relaxed mb-2.5 line-clamp-2">
                             {service.shortSubtitle}
                           </p>
@@ -570,60 +651,103 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="xl:col-span-3 bg-gradient-to-br from-[#f3e3d3] via-[#edd7c2] to-[#e5c9ae] rounded-2xl p-5 border border-[#d8bc9e] flex flex-col justify-between relative overflow-hidden">
-                <div className="grid grid-cols-12 gap-2 items-center">
-                  <div className="col-span-7 z-10">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <GraduationCap className="w-6 h-6 text-[#8c5e20] shrink-0" />
-                      <h3 className="font-serif-luxury text-xl font-bold text-[#3f0e21]">
-                        Beauty Academy
-                      </h3>
-                    </div>
-                    <p className="text-xs font-semibold text-[#2b1820] leading-snug mb-3">
-                      Build a Successful Career in the Beauty Industry
-                    </p>
-
-                    <ul className="space-y-1.5 text-xs text-[#3f0e21] mb-4">
-                      <li className="flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#8c5e20] shrink-0" />
-                        <span>Professional Training</span>
-                      </li>
-                      <li className="flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#8c5e20] shrink-0" />
-                        <span>Hands-on Practice</span>
-                      </li>
-                      <li className="flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#8c5e20] shrink-0" />
-                        <span>Industry Expert Guidance</span>
-                      </li>
-                      <li className="flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#8c5e20] shrink-0" />
-                        <span>9 Confirmed Courses</span>
-                      </li>
-                    </ul>
-
-                    <a
-                      href="#course-enquiry"
-                      className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-[#651b38] hover:bg-[#4a1228] text-white text-xs font-semibold transition-colors whitespace-nowrap shrink-0"
-                    >
-                      <span>Enquire Now</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </a>
+              {/* Quick Book Your Salon Appointment Box */}
+              <div className="xl:col-span-3 bg-gradient-to-br from-[#52142b] via-[#651b38] to-[#3f0e21] text-white rounded-2xl p-5 border border-[#d4af6a]/40 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <Calendar className="w-5 h-5 text-[#e7c98f] shrink-0" />
+                    <h3 className="font-serif-luxury text-lg font-bold text-white">
+                      Quick Salon Booking
+                    </h3>
                   </div>
-
-                  <div className="col-span-5 h-48 rounded-xl overflow-hidden">
-                    <img
-                      src="/assets/sonu/academy-instructor.png"
-                      alt="Beauty Academy Instructor"
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-contain object-bottom"
-                    />
-                  </div>
+                  <p className="text-xs text-[#ebd8c5] mb-3">
+                    Select branch, service, date &amp; time.
+                  </p>
                 </div>
+
+                <form onSubmit={handleQuickBarContinue} className="space-y-2.5">
+                  <div>
+                    <label htmlFor="qb-location" className="sr-only">
+                      Select Your Location
+                    </label>
+                    <select
+                      id="qb-location"
+                      value={selectedLocationId}
+                      onChange={(e) => setSelectedLocationId(e.target.value)}
+                      className="w-full px-2.5 py-2 rounded-lg bg-[#faf3ec] text-[#2b1820] text-xs font-semibold border border-[#d4af6a]/40"
+                    >
+                      {activeLocations.map((loc) => (
+                        <option key={loc.id} value={loc.id}>
+                          {loc.location_name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="qb-service" className="sr-only">
+                      Select Service
+                    </label>
+                    <select
+                      id="qb-service"
+                      value={selectedServiceId}
+                      onChange={(e) => setSelectedServiceId(e.target.value)}
+                      className="w-full px-2.5 py-2 rounded-lg bg-[#faf3ec] text-[#2b1820] text-xs font-medium border border-[#d4af6a]/40"
+                    >
+                      {POPULAR_SERVICES.map((s) => (
+                        <option key={s.id} value={s.id}>
+                          {s.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <label htmlFor="qb-date" className="sr-only">
+                        Select Date
+                      </label>
+                      <input
+                        id="qb-date"
+                        type="date"
+                        min={getKolkataNow().dateStr}
+                        value={quickDate}
+                        onChange={(e) => setQuickDate(e.target.value)}
+                        className="w-full px-2 py-2 rounded-lg bg-[#faf3ec] text-[#2b1820] text-xs font-medium border border-[#d4af6a]/40 tabular-nums"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="qb-time" className="sr-only">
+                        Select Time
+                      </label>
+                      <select
+                        id="qb-time"
+                        value={quickTime}
+                        onChange={(e) => setQuickTime(e.target.value)}
+                        className="w-full px-2 py-2 rounded-lg bg-[#faf3ec] text-[#2b1820] text-xs font-medium border border-[#d4af6a]/40 tabular-nums"
+                      >
+                        {STANDARD_TIME_SLOTS.map((slot) => (
+                          <option key={slot} value={slot}>
+                            {slot}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-gradient-to-r from-[#e5c78e] to-[#cfa356] hover:from-[#ebd096] hover:to-[#d9b066] text-[#2b101b] font-bold text-xs sm:text-sm shadow-xs transition-all cursor-pointer"
+                  >
+                    <span>Continue to Booking</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </form>
               </div>
             </div>
 
-            {/* SECTION 6: COMPLETE BEAUTY SERVICE CATALOG (36 Client-Supplied Services) */}
+            {/* COMPLETE BEAUTY SERVICE CATALOG (36 Client-Supplied Services) */}
             <div
               id="services-pricing"
               className="mt-12 pt-10 border-t border-[#e5d3c0] scroll-mt-24"
@@ -631,7 +755,7 @@ export default function App() {
               <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-6">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-widest text-[#7c2344] mb-1">
-                    Section A · Complete Salon Menu (36 Services)
+                    Sonu&apos;s Beauty Studio · Complete Salon Menu (36 Services)
                   </p>
                   <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#3f0e21]">
                     Complete Beauty Services &amp; Pricing Catalog
@@ -744,188 +868,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* ABOUT SONU'S BEAUTY STUDIO & ACADEMY + QUICK BOOKING BAR */}
-        <section
-          id="about"
-          className="py-10 sm:py-14 bg-[#faf3ec] border-t border-[#e5d3c0] scroll-mt-24"
-        >
-          <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-              <div className="lg:col-span-4 rounded-2xl overflow-hidden border border-[#dec5ac] bg-[#e9d5c0] min-h-[220px]">
-                <img
-                  src="/assets/sonu/salon-interior.png"
-                  alt="Sonu's Beauty Studio & Academy Salon Interior"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-center"
-                />
-              </div>
-
-              <div className="lg:col-span-4 flex flex-col justify-between py-1">
-                <div>
-                  <h2 className="font-serif-luxury text-2xl sm:text-[26px] font-bold text-[#2b1820] leading-snug mb-3">
-                    About{' '}
-                    <span className="text-[#651b38]">
-                      Sonu&apos;s Beauty Studio &amp; Academy
-                    </span>
-                  </h2>
-                  <p className="text-xs sm:text-sm text-[#4a2f39] leading-relaxed mb-5">
-                    A modern beauty studio and professional training academy operating across two
-                    branches in Vadodara, dedicated to enhancing your natural beauty and building
-                    practical careers alongside{' '}
-                    <strong>Sonu Foundation and Charitable Trust</strong>.
-                  </p>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-3 border-y border-[#e2cbb3] mb-4">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-5 h-5 text-[#8c5e20] shrink-0" />
-                      <div>
-                        <p className="text-xs font-bold text-[#2b1820]">2 Branches</p>
-                        <p className="text-[10px] text-[#684752]">Vadodara Studios</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-[#8c5e20] shrink-0" />
-                      <div>
-                        <p className="text-xs font-bold text-[#2b1820]">36 Services</p>
-                        <p className="text-[10px] text-[#684752]">Full Salon Care</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <GraduationCap className="w-5 h-5 text-[#8c5e20] shrink-0" />
-                      <div>
-                        <p className="text-xs font-bold text-[#2b1820]">9 Courses</p>
-                        <p className="text-[10px] text-[#684752]">Beauty Academy</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <HeartHandshake className="w-5 h-5 text-[#8c5e20] shrink-0" />
-                      <div>
-                        <p className="text-xs font-bold text-[#2b1820]">3 Tracks</p>
-                        <p className="text-[10px] text-[#684752]">Foundation Trust</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <a
-                    href="#locations"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[#651b38]/40 text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1] transition-colors"
-                  >
-                    <span>Explore Our Two Branches</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
-
-              {/* Quick Book Your Appointment Box (with Branch Selector) */}
-              <div className="lg:col-span-4 bg-gradient-to-br from-[#52142b] via-[#651b38] to-[#3f0e21] text-white rounded-2xl p-5 sm:p-6 border border-[#d4af6a]/40 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-2.5 mb-1">
-                    <Calendar className="w-5 h-5 text-[#e7c98f] shrink-0" />
-                    <h3 className="font-serif-luxury text-xl font-bold text-white">
-                      Book Your Appointment
-                    </h3>
-                  </div>
-                  <p className="text-xs text-[#ebd8c5] mb-3">
-                    Select your branch, service, date &amp; time.
-                  </p>
-                </div>
-
-                <form onSubmit={handleQuickBarContinue} className="space-y-2.5">
-                  <div>
-                    <label htmlFor="qb-location" className="sr-only">
-                      Select Your Location
-                    </label>
-                    <select
-                      id="qb-location"
-                      value={selectedLocationId}
-                      onChange={(e) => setSelectedLocationId(e.target.value)}
-                      className="w-full px-2.5 py-2 rounded-lg bg-[#faf3ec] text-[#2b1820] text-xs font-semibold border border-[#d4af6a]/40"
-                    >
-                      {activeLocations.map((loc) => (
-                        <option key={loc.id} value={loc.id}>
-                          {loc.location_name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    <div>
-                      <label htmlFor="qb-service" className="sr-only">
-                        Select Service
-                      </label>
-                      <select
-                        id="qb-service"
-                        value={selectedServiceId}
-                        onChange={(e) => setSelectedServiceId(e.target.value)}
-                        className="w-full px-2.5 py-2 rounded-lg bg-[#faf3ec] text-[#2b1820] text-xs font-medium border border-[#d4af6a]/40"
-                      >
-                        {POPULAR_SERVICES.map((s) => (
-                          <option key={s.id} value={s.id}>
-                            {s.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="qb-date" className="sr-only">
-                        Select Date
-                      </label>
-                      <input
-                        id="qb-date"
-                        type="date"
-                        min={getKolkataNow().dateStr}
-                        value={quickDate}
-                        onChange={(e) => setQuickDate(e.target.value)}
-                        className="w-full px-2.5 py-2 rounded-lg bg-[#faf3ec] text-[#2b1820] text-xs font-medium border border-[#d4af6a]/40 tabular-nums"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="qb-time" className="sr-only">
-                        Select Time
-                      </label>
-                      <select
-                        id="qb-time"
-                        value={quickTime}
-                        onChange={(e) => setQuickTime(e.target.value)}
-                        className="w-full px-2.5 py-2 rounded-lg bg-[#faf3ec] text-[#2b1820] text-xs font-medium border border-[#d4af6a]/40 tabular-nums"
-                      >
-                        {STANDARD_TIME_SLOTS.map((slot) => (
-                          <option key={slot} value={slot}>
-                            {slot}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-5 rounded-lg bg-gradient-to-r from-[#e5c78e] to-[#cfa356] hover:from-[#ebd096] hover:to-[#d9b066] text-[#2b101b] font-bold text-sm shadow-xs transition-all cursor-pointer"
-                  >
-                    <span>Book Now</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION B & C: BEAUTY ACADEMY (9 COURSES) + SONU FOUNDATION AND CHARITABLE TRUST */}
-        <FoundationAndCoursesSection
-          locations={activeLocations}
-          selectedCourseId={selectedCourseId}
-          onSelectCourseForEnquiry={(courseId) => setSelectedCourseId(courseId)}
-        />
-
         {/* GALLERY (11 CATEGORIES) + OUR LOCATIONS (BRANCH 1 & BRANCH 2) + REVIEWS */}
         <GalleryAndBranchesSection
           locations={activeLocations}
@@ -944,25 +886,30 @@ export default function App() {
         />
       </main>
 
-      {/* FOOTER (Clean, No Admin Links) */}
+      {/* FOOTER (Clean, No Admin Links, Sonu Foundation Primary Identity) */}
       <footer className="bg-[#3d0e20] text-[#f3e3d3] border-t border-[#d4af6a]/30">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8">
             <div className="lg:col-span-3 space-y-4">
-              <BrandLogo variant="light-text" label="Sonu Foundation and Charitable Trust" />
+              <BrandLogo
+                variant="light-text"
+                label="Sonu Foundation and Charitable Trust"
+                logoSrc="/assets/aistudio/ChatGPT_Image_Nov_4__2026__09_51_48_PM_d8847b86.png"
+              />
               <p className="text-xs text-[#dbc4b0] leading-relaxed">
-                Premium salon care, bridal makeup artistry, and vocational training programs in
-                partnership with{' '}
+                Empowering women and youth through vocational skill development in Beauty Training,
+                Stitching &amp; Tailoring, and Computer Classes—alongside professional salon care
+                and courses at{' '}
                 <strong className="text-[#f7e7ce]">
-                  Sonu Foundation and Charitable Trust
+                  Sonu&apos;s Beauty Studio &amp; Academy
                 </strong>{' '}
-                across two studio branches in Vadodara, Gujarat.
+                in Vadodara, Gujarat.
               </p>
               <div className="flex flex-wrap items-center gap-2.5 pt-1">
                 <a
                   href={buildWhatsAppUrl(
                     BRAND_CONTACT.whatsappNumber,
-                    "Hello Sonu's Beauty Studio & Academy, I have an enquiry."
+                    'Hello Sonu Foundation and Charitable Trust, I have an enquiry.'
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -983,22 +930,60 @@ export default function App() {
 
             <div className="lg:col-span-2">
               <h3 className="font-serif-luxury text-base font-bold text-white mb-3">
-                Quick Links
+                Foundation Links
               </h3>
               <ul className="space-y-2 text-xs text-[#e5d0bc]">
                 <li>
-                  <a href="#home" className="hover:text-white transition-colors">
-                    Home
+                  <a href="#about-foundation" className="hover:text-white transition-colors">
+                    About Foundation
                   </a>
                 </li>
                 <li>
-                  <a href="#about" className="hover:text-white transition-colors">
-                    About Us
+                  <a href="#our-mission" className="hover:text-white transition-colors">
+                    Our Mission &amp; Vision
                   </a>
                 </li>
                 <li>
-                  <a href="#services-pricing" className="hover:text-white transition-colors">
-                    Services &amp; Pricing
+                  <a href="#our-programs" className="hover:text-white transition-colors">
+                    Our Training Programs
+                  </a>
+                </li>
+                <li>
+                  <a href="#student-stories" className="hover:text-white transition-colors">
+                    Student Success Stories
+                  </a>
+                </li>
+                <li>
+                  <a href="#achievements" className="hover:text-white transition-colors">
+                    Student Achievements
+                  </a>
+                </li>
+                <li>
+                  <a href="#events" className="hover:text-white transition-colors">
+                    Events &amp; Workshops
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="lg:col-span-2">
+              <h3 className="font-serif-luxury text-base font-bold text-white mb-3">
+                Skill Programs
+              </h3>
+              <ul className="space-y-2 text-xs text-[#e5d0bc]">
+                <li>
+                  <a href="#beauty-classes" className="hover:text-white transition-colors">
+                    Beauty Training Classes
+                  </a>
+                </li>
+                <li>
+                  <a href="#stitching-classes" className="hover:text-white transition-colors">
+                    Stitching &amp; Tailoring Classes
+                  </a>
+                </li>
+                <li>
+                  <a href="#computer-classes" className="hover:text-white transition-colors">
+                    Computer Education Classes
                   </a>
                 </li>
                 <li>
@@ -1007,13 +992,13 @@ export default function App() {
                   </a>
                 </li>
                 <li>
-                  <a href="#foundation" className="hover:text-white transition-colors">
-                    Sonu Foundation Trust
+                  <a href="#certificates" className="hover:text-white transition-colors">
+                    Certificates &amp; Recognition
                   </a>
                 </li>
                 <li>
-                  <a href="#locations" className="hover:text-white transition-colors">
-                    Our Two Locations
+                  <a href="#course-enquiry" className="hover:text-white transition-colors">
+                    Admission Enquiry Form
                   </a>
                 </li>
               </ul>
@@ -1021,7 +1006,7 @@ export default function App() {
 
             <div className="lg:col-span-2">
               <h3 className="font-serif-luxury text-base font-bold text-white mb-3">
-                Beauty Services
+                Beauty Studio
               </h3>
               <ul className="space-y-2 text-xs text-[#e5d0bc]">
                 <li>
@@ -1046,50 +1031,12 @@ export default function App() {
                 </li>
                 <li>
                   <a href="#services-pricing" className="hover:text-white transition-colors">
-                    Low Bun, Messy Bun &amp; Braids
-                  </a>
-                </li>
-                <li>
-                  <a href="#services-pricing" className="hover:text-white transition-colors">
                     Acrylic, Gel &amp; Nail Art
                   </a>
                 </li>
-              </ul>
-            </div>
-
-            <div className="lg:col-span-2">
-              <h3 className="font-serif-luxury text-base font-bold text-white mb-3">
-                Academy &amp; Trust
-              </h3>
-              <ul className="space-y-2 text-xs text-[#e5d0bc]">
                 <li>
-                  <a href="#professional-courses" className="hover:text-white transition-colors">
-                    Basic, Advanced &amp; Makeup Courses
-                  </a>
-                </li>
-                <li>
-                  <a href="#professional-courses" className="hover:text-white transition-colors">
-                    Mehendi, Nails, PMU &amp; Eyelashes
-                  </a>
-                </li>
-                <li>
-                  <a href="#beauty-classes" className="hover:text-white transition-colors">
-                    Foundation Beauty Classes
-                  </a>
-                </li>
-                <li>
-                  <a href="#stitching-classes" className="hover:text-white transition-colors">
-                    Stitching &amp; Tailoring Classes
-                  </a>
-                </li>
-                <li>
-                  <a href="#computer-classes" className="hover:text-white transition-colors">
-                    Computer Education Classes
-                  </a>
-                </li>
-                <li>
-                  <a href="#course-enquiry" className="hover:text-white transition-colors">
-                    Course Enquiry Form
+                  <a href="#appointment-booking" className="hover:text-white transition-colors">
+                    Book Salon Appointment
                   </a>
                 </li>
               </ul>
@@ -1131,7 +1078,7 @@ export default function App() {
 
               <div className="pt-2">
                 <p className="font-serif-luxury text-sm font-semibold text-white mb-2">
-                  Subscribe for Offers &amp; Updates
+                  Subscribe for Program &amp; Salon Updates
                 </p>
                 <form onSubmit={handleNewsletterSubmit} className="flex items-center">
                   <label htmlFor="footer-email" className="sr-only">
@@ -1147,7 +1094,7 @@ export default function App() {
                   />
                   <button
                     type="submit"
-                    aria-label="Subscribe for offers"
+                    aria-label="Subscribe for updates"
                     className="px-3.5 py-2 rounded-r-lg bg-[#d4af6a] hover:bg-[#e0be7c] text-[#2d0917] cursor-pointer"
                   >
                     <Send className="w-4 h-4" />
@@ -1162,8 +1109,8 @@ export default function App() {
 
           <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#cbb099]">
             <p>
-              &copy; {new Date().getFullYear()} Sonu&apos;s Beauty Studio &amp; Academy · Sonu
-              Foundation and Charitable Trust. All rights reserved.
+              &copy; {new Date().getFullYear()} Sonu Foundation and Charitable Trust · Sonu&apos;s
+              Beauty Studio &amp; Academy. All rights reserved.
             </p>
             <p>Branch 1 &amp; Branch 2 (22.305021, 73.210297) · Vadodara, Gujarat</p>
           </div>
@@ -1174,11 +1121,11 @@ export default function App() {
       <a
         href={buildWhatsAppUrl(
           BRAND_CONTACT.whatsappNumber,
-          "Hello Sonu's Beauty Studio & Academy, I would like to book an appointment / enquire about courses."
+          'Hello Sonu Foundation and Charitable Trust, I would like to enquire about training programs / salon appointments.'
         )}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat with Sonu's Beauty Studio on WhatsApp"
+        aria-label="Chat with Sonu Foundation and Charitable Trust on WhatsApp"
         className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 px-4 py-3 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs sm:text-sm font-bold shadow-lg transition-transform hover:scale-105"
       >
         <MessageCircle className="w-5 h-5 fill-current" />

@@ -17,6 +17,9 @@ import {
   HeartHandshake,
   Users,
   FileCheck2,
+  Compass,
+  Target,
+  CalendarDays,
 } from 'lucide-react';
 import {
   ACADEMY_COURSES,
@@ -39,10 +42,10 @@ interface FoundationAndCoursesSectionProps {
 }
 
 const COURSE_CATEGORIES: CourseCategoryName[] = [
-  'Beauty Academy — Professional Courses',
   'Beauty Training Classes',
   'Stitching & Tailoring Classes',
   'Computer Classes',
+  'Beauty Academy — Professional Courses',
 ];
 
 export const FoundationAndCoursesSection: React.FC<FoundationAndCoursesSectionProps> = ({
@@ -56,9 +59,9 @@ export const FoundationAndCoursesSection: React.FC<FoundationAndCoursesSectionPr
   const [studentName, setStudentName] = useState('');
   const [phone, setPhone] = useState('');
   const [courseCategory, setCourseCategory] = useState<CourseCategoryName>(
-    'Beauty Academy — Professional Courses'
+    'Beauty Training Classes'
   );
-  const [courseId, setCourseId] = useState(selectedCourseId || ACADEMY_COURSES[0].id);
+  const [courseId, setCourseId] = useState(selectedCourseId || FOUNDATION_COURSES[0].id);
   const [preferredBranch, setPreferredBranch] = useState<string>(
     locations[0]?.id || 'location-1'
   );
@@ -92,7 +95,7 @@ export const FoundationAndCoursesSection: React.FC<FoundationAndCoursesSectionPr
     if (locations.length > 0 && !locations.some((l) => l.id === preferredBranch)) {
       setPreferredBranch(locations[0].id);
     }
-  }, [locations]);
+  }, [locations, preferredBranch]);
 
   const coursesInSelectedCategory = React.useMemo(() => {
     const filtered = TRAINING_COURSES.filter((c) => c.category === courseCategory);
@@ -189,7 +192,615 @@ export const FoundationAndCoursesSection: React.FC<FoundationAndCoursesSectionPr
   return (
     <>
       {/* =====================================================================
-          SECTION 1: SONU'S BEAUTY ACADEMY & COMPLETE 9-COURSE CATALOG
+          SECTION 1: SONU FOUNDATION AND CHARITABLE TRUST (PRIMARY NGO SECTIONS)
+          Inspired by SAATH.org — About Foundation, Our Mission, Our Programs,
+          Student Success Stories, Achievements & Certificates, Events
+          ===================================================================== */}
+      <section
+        id="foundation"
+        className="py-14 sm:py-20 bg-[#faf3ec] border-t border-[#e5d3c0] scroll-mt-24"
+      >
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+          {/* PART A: OUR CORE SKILL DEVELOPMENT PROGRAMS (Featured First for NGO Impact) */}
+          <div id="our-programs" className="scroll-mt-24 mb-16">
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-widest text-[#7c2344] mb-1.5">
+                  Sonu Foundation and Charitable Trust · Core Livelihood &amp; Skill Tracks
+                </p>
+                <h2 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#3f0e21]">
+                  Our Skill Development &amp; Training Programs
+                </h2>
+                <p className="text-sm sm:text-base text-[#563843] mt-2 max-w-3xl">
+                  Inspired by community-first vocational initiatives,{' '}
+                  <strong>Sonu Foundation and Charitable Trust</strong> delivers structured
+                  classroom and practical training across three dedicated skill tracks in Vadodara.
+                </p>
+              </div>
+              <div className="shrink-0">
+                <a
+                  href="#course-enquiry"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#5e1933] hover:bg-[#4a1228] text-white text-xs sm:text-sm font-semibold transition-colors whitespace-nowrap"
+                >
+                  <span>Enquire for Program Admission</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+
+            <div
+              id="training-programs"
+              className="grid grid-cols-1 lg:grid-cols-3 gap-7 scroll-mt-24"
+            >
+              {FOUNDATION_COURSES.map((prog, index) => {
+                const sectionAnchorId =
+                  prog.category === 'Beauty Training Classes'
+                    ? 'beauty-classes'
+                    : prog.category === 'Stitching & Tailoring Classes'
+                    ? 'stitching-classes'
+                    : 'computer-classes';
+
+                return (
+                  <article
+                    key={prog.id}
+                    id={sectionAnchorId}
+                    className="bg-white rounded-2xl overflow-hidden border border-[#dec5ac] flex flex-col justify-between shadow-xs hover:border-[#b98b56] transition-colors scroll-mt-28"
+                  >
+                    <div>
+                      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#f4e8dc]">
+                        <img
+                          src={prog.image}
+                          alt={prog.title}
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover object-center"
+                        />
+                        <span className="absolute top-3 left-3 px-3 py-1 rounded-md bg-[#5e1933]/95 text-[#f7e7ce] text-[11px] font-semibold">
+                          Foundation Track 0{index + 1}
+                        </span>
+                      </div>
+
+                      <div className="p-6">
+                        <div className="flex items-center gap-2 text-xs font-semibold text-[#7c2344] mb-1.5">
+                          {prog.category === 'Beauty Training Classes' && (
+                            <Sparkles className="w-4 h-4" />
+                          )}
+                          {prog.category === 'Stitching & Tailoring Classes' && (
+                            <Scissors className="w-4 h-4" />
+                          )}
+                          {prog.category === 'Computer Classes' && (
+                            <Monitor className="w-4 h-4" />
+                          )}
+                          <span>{prog.category}</span>
+                        </div>
+
+                        <h3 className="font-serif-luxury text-2xl font-bold text-[#3f0e21] mb-2">
+                          {prog.title}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-[#563843] leading-relaxed mb-4">
+                          {prog.description}
+                        </p>
+
+                        <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-[#faf3ec] border border-[#e5d3c0] text-xs text-[#4a1228] mb-4">
+                          <div>
+                            <span className="text-[10px] text-[#7a5864] block">Duration</span>
+                            <span className="font-semibold">{prog.duration}</span>
+                          </div>
+                          <div>
+                            <span className="text-[10px] text-[#7a5864] block">Fees</span>
+                            <span className="font-semibold">{prog.fees}</span>
+                          </div>
+                          <div>
+                            <span className="text-[10px] text-[#7a5864] block">Eligibility</span>
+                            <span className="font-semibold">{prog.eligibility}</span>
+                          </div>
+                          <div>
+                            <span className="text-[10px] text-[#7a5864] block">Batch Timings</span>
+                            <span className="font-semibold">{prog.batchTimings}</span>
+                          </div>
+                        </div>
+
+                        <div className="mb-3">
+                          <p className="text-[11px] font-bold uppercase tracking-wider text-[#4a1228] mb-1.5">
+                            Practical Curriculum &amp; Skills Taught:
+                          </p>
+                          <div className="space-y-1.5">
+                            {prog.modules.map((mod, idx) => (
+                              <div
+                                key={idx}
+                                className="flex items-start gap-2 text-xs text-[#563843]"
+                              >
+                                <CheckCircle2 className="w-3.5 h-3.5 text-[#5e1933] shrink-0 mt-0.5" />
+                                <span>{mod}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="px-6 pb-6 pt-3 border-t border-[#f0e2d3] flex items-center justify-between gap-2">
+                      <button
+                        type="button"
+                        onClick={() => handleSelectCourseAndScroll(prog.id)}
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-[#5e1933] hover:bg-[#4a1228] text-white text-xs font-semibold transition-colors cursor-pointer"
+                      >
+                        <span>Enquire for Program</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setActiveCourseModal(prog)}
+                        className="inline-flex items-center justify-center gap-1 px-3 py-2.5 rounded-lg border border-[#d5bda4] hover:bg-[#faf3ec] text-[#4a1228] text-xs font-semibold transition-colors cursor-pointer"
+                      >
+                        <BookOpen className="w-3.5 h-3.5" />
+                        <span>Syllabus</span>
+                      </button>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* PART B: ABOUT FOUNDATION & OUR MISSION (SAATH-Style Editorial Storytelling) */}
+          <div
+            id="about-foundation"
+            className="scroll-mt-24 rounded-2xl bg-gradient-to-r from-[#3f0e21] via-[#5e1933] to-[#4a1228] text-[#faf3ec] p-6 sm:p-10 lg:p-12 border border-[#d4af6a]/40 mb-10"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-7">
+                <p className="text-xs font-semibold uppercase tracking-widest text-[#e7c98f] mb-2">
+                  About Foundation · Community Skill Development Initiative
+                </p>
+                <h2 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-white leading-tight mb-4">
+                  About Sonu Foundation and Charitable Trust
+                </h2>
+                <p className="text-[#f1e2d3] text-sm sm:text-base leading-relaxed mb-4">
+                  <strong className="text-white">Sonu Foundation and Charitable Trust</strong> is
+                  dedicated to empowering women, youth, and aspiring learners in Vadodara through
+                  dignified, hands-on vocational training. Rather than abstract theory, our
+                  classrooms focus on real-world skill mastery in{' '}
+                  <span className="text-[#e7c98f] font-medium">
+                    Beauty Training, Stitching &amp; Tailoring, and Computer Education
+                  </span>
+                  .
+                </p>
+                <p className="text-[#ebd8c5] text-sm leading-relaxed">
+                  Working closely with our professional salon and training division,{' '}
+                  <strong className="text-white">Sonu&apos;s Beauty Studio &amp; Academy</strong>,
+                  trainees learn in disciplined studio and classroom environments across two
+                  accessible branches in Vadodara, Gujarat.
+                </p>
+              </div>
+
+              <div className="lg:col-span-5 grid grid-cols-2 gap-3">
+                <div className="rounded-xl overflow-hidden border border-[#d4af6a]/40 bg-[#2b0916] aspect-[4/3]">
+                  <img
+                    src="/assets/sonu/salon-interior.png"
+                    alt="Sonu Foundation Training Environment"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+                <div className="rounded-xl overflow-hidden border border-[#d4af6a]/40 bg-[#2b0916] aspect-[4/3]">
+                  <img
+                    src="/assets/sonu/hero-reception.png"
+                    alt="Sonu Foundation & Studio Reception"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+                <div className="col-span-2 rounded-xl bg-white/10 border border-[#d4af6a]/30 p-4 flex items-center justify-between gap-4">
+                  <div>
+                    <p className="font-serif-luxury text-base font-bold text-[#f7e7ce]">
+                      Practical Livelihood Education
+                    </p>
+                    <p className="text-xs text-[#e6d0b8]">
+                      Beauty Training · Stitching &amp; Tailoring · Computer Classes
+                    </p>
+                  </div>
+                  <a
+                    href="#course-enquiry"
+                    className="px-4 py-2 rounded-lg bg-[#d4af6a] hover:bg-[#e0be7c] text-[#2d0917] text-xs font-bold whitespace-nowrap shrink-0"
+                  >
+                    Join a Batch
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* OUR MISSION, VISION & EDUCATIONAL APPROACH */}
+          <div
+            id="our-mission"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 scroll-mt-24"
+          >
+            <div className="bg-[#f5ebe0] rounded-2xl p-6 border border-[#e2cbb3] flex flex-col justify-between">
+              <div>
+                <div className="w-9 h-9 rounded-lg bg-[#5e1933]/10 text-[#5e1933] flex items-center justify-center mb-3">
+                  <HeartHandshake className="w-5 h-5" />
+                </div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-[#7c2344] mb-1">
+                  01. About Our Purpose
+                </p>
+                <h3 className="font-serif-luxury text-xl font-bold text-[#3f0e21] mb-2">
+                  Skill Literacy for All
+                </h3>
+                <p className="text-xs sm:text-sm text-[#563843] leading-relaxed">
+                  Providing accessible, step-by-step vocational training for women and youth across
+                  beauty care, garment stitching, and essential computer operations.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-[#f5ebe0] rounded-2xl p-6 border border-[#e2cbb3] flex flex-col justify-between">
+              <div>
+                <div className="w-9 h-9 rounded-lg bg-[#5e1933]/10 text-[#5e1933] flex items-center justify-center mb-3">
+                  <Target className="w-5 h-5" />
+                </div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-[#7c2344] mb-1">
+                  02. Our Mission
+                </p>
+                <h3 className="font-serif-luxury text-xl font-bold text-[#3f0e21] mb-2">
+                  Hands-On Vocational Mastery
+                </h3>
+                <p className="text-xs sm:text-sm text-[#563843] leading-relaxed">
+                  To deliver disciplined, practical training in beauty services, stitching &amp;
+                  tailoring, and computer literacy that prepares learners for self-reliance.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-[#f5ebe0] rounded-2xl p-6 border border-[#e2cbb3] flex flex-col justify-between">
+              <div>
+                <div className="w-9 h-9 rounded-lg bg-[#5e1933]/10 text-[#5e1933] flex items-center justify-center mb-3">
+                  <Compass className="w-5 h-5" />
+                </div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-[#7c2344] mb-1">
+                  03. Our Vision
+                </p>
+                <h3 className="font-serif-luxury text-xl font-bold text-[#3f0e21] mb-2">
+                  Self-Reliant Communities
+                </h3>
+                <p className="text-xs sm:text-sm text-[#563843] leading-relaxed">
+                  To foster confidence, independent livelihood capability, and continuous skill
+                  growth through supportive classroom mentorship in Vadodara.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-[#f5ebe0] rounded-2xl p-6 border border-[#e2cbb3] flex flex-col justify-between">
+              <div>
+                <div className="w-9 h-9 rounded-lg bg-[#5e1933]/10 text-[#5e1933] flex items-center justify-center mb-3">
+                  <Users className="w-5 h-5" />
+                </div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-[#7c2344] mb-1">
+                  04. Qualitative Impact
+                </p>
+                <h3 className="font-serif-luxury text-xl font-bold text-[#3f0e21] mb-2">
+                  Practice-Led Confidence
+                </h3>
+                <p className="text-xs sm:text-sm text-[#563843] leading-relaxed">
+                  Through daily practical workshops, guided instructor feedback, and peer learning
+                  batches, students gain real operational confidence.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* PART C: STUDENT SUCCESS STORIES & ACHIEVEMENTS */}
+          <div
+            id="student-stories"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16 scroll-mt-24"
+          >
+            <div className="lg:col-span-6 bg-[#f5ebe0] rounded-2xl p-6 sm:p-8 border border-[#e2cbb3] flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#7c2344] mb-2">
+                  <HeartHandshake className="w-4 h-4 text-[#5e1933]" />
+                  <span>Student Success Stories &amp; Learner Journeys</span>
+                </div>
+                <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#3f0e21] mb-3">
+                  Student Success Stories
+                </h3>
+                <p className="text-xs sm:text-sm text-[#563843] leading-relaxed mb-4">
+                  Authentic reflections from learners trained under{' '}
+                  <strong>Sonu Foundation and Charitable Trust</strong> and{' '}
+                  <strong>Sonu&apos;s Beauty Academy</strong>:
+                </p>
+
+                <div className="space-y-3.5">
+                  <div className="p-4 rounded-xl bg-white border border-[#e2cbb3]">
+                    <p className="text-xs sm:text-sm text-[#4a1228] leading-relaxed mb-2">
+                      &ldquo;Learning basic beauty, threading, and bridal makeup steps in a real
+                      studio setting helped me understand both client hygiene and practical
+                      application.&rdquo;
+                    </p>
+                    <p className="text-xs font-bold text-[#5e1933]">
+                      — Beauty &amp; Makeup Batch Trainee · Vadodara
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-white border border-[#e2cbb3]">
+                    <p className="text-xs sm:text-sm text-[#4a1228] leading-relaxed mb-2">
+                      &ldquo;Our stitching and tailoring classes start from sewing machine
+                      threading and paper drafting, making it easy for beginners to learn garment
+                      cutting step by step.&rdquo;
+                    </p>
+                    <p className="text-xs font-bold text-[#5e1933]">
+                      — Stitching &amp; Tailoring Batch Learner · Sonu Foundation
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-white border border-[#e2cbb3]">
+                    <p className="text-xs sm:text-sm text-[#4a1228] leading-relaxed mb-2">
+                      &ldquo;Practicing MS Word, MS Excel tables, and everyday computer operations
+                      in guided sessions helped me build confidence for office and billing
+                      tasks.&rdquo;
+                    </p>
+                    <p className="text-xs font-bold text-[#5e1933]">
+                      — Computer Literacy Batch Learner · Sonu Foundation
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 pt-4 mt-4 border-t border-[#dec6ad]">
+                <a
+                  href="#student-gallery"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white border border-[#d5bda4] text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
+                >
+                  <span>View Student &amp; Batch Photographs</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+                <a
+                  href="#course-enquiry"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#5e1933] text-xs font-semibold text-white hover:bg-[#4a1228]"
+                >
+                  <span>Enquire for Next Batch</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+
+            <div
+              id="achievements"
+              className="lg:col-span-6 bg-[#f5ebe0] rounded-2xl p-6 sm:p-8 border border-[#e2cbb3] flex flex-col justify-between scroll-mt-24"
+            >
+              <div>
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#7c2344] mb-2">
+                  <Award className="w-4 h-4 text-[#5e1933]" />
+                  <span>Student Achievements &amp; Skill Milestones</span>
+                </div>
+                <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#3f0e21] mb-3">
+                  Training Achievements &amp; Practical Outcomes
+                </h3>
+                <p className="text-xs sm:text-sm text-[#563843] leading-relaxed mb-4">
+                  Every training batch focuses on tangible, demonstrable skill outcomes verified
+                  through practical assessments and studio demonstrations:
+                </p>
+
+                <ul className="space-y-3 text-xs sm:text-sm text-[#4a1228] mb-6">
+                  <li className="flex items-start gap-2.5 p-3.5 rounded-xl bg-white border border-[#e2cbb3]">
+                    <CheckCircle2 className="w-4 h-4 text-[#5e1933] shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="block text-[#3f0e21]">
+                        Beauty &amp; Bridal Portfolio Demonstrations
+                      </strong>
+                      <span>
+                        Trainees complete supervised practical sessions in threading, waxing,
+                        facials, hair styling, nail extensions, Mehendi, and bridal/festive makeup.
+                      </span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5 p-3.5 rounded-xl bg-white border border-[#e2cbb3]">
+                    <CheckCircle2 className="w-4 h-4 text-[#5e1933] shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="block text-[#3f0e21]">
+                        Garment Drafting &amp; Tailoring Projects
+                      </strong>
+                      <span>
+                        Stitching learners complete measurement taking, paper pattern drafting,
+                        machine control, and finished garment stitching exercises.
+                      </span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5 p-3.5 rounded-xl bg-white border border-[#e2cbb3]">
+                    <CheckCircle2 className="w-4 h-4 text-[#5e1933] shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="block text-[#3f0e21]">
+                        Digital Literacy &amp; Office Documentation
+                      </strong>
+                      <span>
+                        Computer learners complete practical assignments in MS Word formatting,
+                        MS Excel spreadsheets, MS PowerPoint presentations, and internet usage.
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <p className="text-[11px] text-[#6e4d59] pt-3 border-t border-[#dec6ad]">
+                All student batch photographs, certificate distribution moments, and practical
+                portfolios are showcased in our Student Gallery below.
+              </p>
+            </div>
+          </div>
+
+          {/* PART D: EVENTS, TRAINING WORKSHOPS & GUEST ACTIVITIES (#events) */}
+          <div id="events" className="mb-16 scroll-mt-24">
+            <div className="mb-8">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#7c2344] mb-1">
+                <CalendarDays className="w-4 h-4 text-[#5e1933]" />
+                <span>Foundation Activities · Training Sessions &amp; Community Events</span>
+              </div>
+              <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#3f0e21]">
+                Training Activities, Workshops &amp; Certificate Events
+              </h3>
+              <p className="text-xs sm:text-sm text-[#563843] mt-1">
+                Ongoing educational activities, practical demonstrations, and student felicitation
+                programs hosted across our Vadodara branches.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <article className="bg-white rounded-2xl overflow-hidden border border-[#dec5ac] flex flex-col justify-between shadow-2xs">
+                <div>
+                  <div className="aspect-[16/10] w-full overflow-hidden bg-[#f4e8dc]">
+                    <img
+                      src="/assets/sonu/academy-instructor.png"
+                      alt="Practical Beauty & Bridal Workshop Session"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-contain bg-[#f3e3d3] object-center"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <span className="inline-block px-2.5 py-0.5 rounded bg-[#f5ebe0] text-[#5e1933] text-[11px] font-semibold mb-2">
+                      Practical Workshop
+                    </span>
+                    <h4 className="font-serif-luxury text-lg font-bold text-[#3f0e21] mb-1.5">
+                      Live Beauty, Makeup &amp; Hairstyling Demonstrations
+                    </h4>
+                    <p className="text-xs text-[#563843] leading-relaxed">
+                      Supervised studio demonstrations where students observe and practice skin
+                      preparation, bridal makeup blending, hairstyling buns/braids, and hygiene
+                      standards.
+                    </p>
+                  </div>
+                </div>
+                <div className="px-5 pb-5 pt-2 border-t border-[#f0e2d3]">
+                  <a
+                    href="#course-enquiry"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#5e1933] hover:text-[#3f0e21]"
+                  >
+                    <span>Enquire for Upcoming Batch</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </article>
+
+              <article className="bg-white rounded-2xl overflow-hidden border border-[#dec5ac] flex flex-col justify-between shadow-2xs">
+                <div>
+                  <div className="aspect-[16/10] w-full overflow-hidden bg-[#f4e8dc]">
+                    <img
+                      src="/assets/sonu/salon-interior.png"
+                      alt="Stitching, Tailoring & Computer Skill Classroom"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-center"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <span className="inline-block px-2.5 py-0.5 rounded bg-[#f5ebe0] text-[#5e1933] text-[11px] font-semibold mb-2">
+                      Vocational Classroom
+                    </span>
+                    <h4 className="font-serif-luxury text-lg font-bold text-[#3f0e21] mb-1.5">
+                      Stitching, Tailoring &amp; Computer Literacy Sessions
+                    </h4>
+                    <p className="text-xs text-[#563843] leading-relaxed">
+                      Structured batch sessions covering garment pattern drafting, sewing machine
+                      practice, MS Word, MS Excel, MS PowerPoint, and foundational digital skills.
+                    </p>
+                  </div>
+                </div>
+                <div className="px-5 pb-5 pt-2 border-t border-[#f0e2d3]">
+                  <a
+                    href="#our-programs"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#5e1933] hover:text-[#3f0e21]"
+                  >
+                    <span>Explore Foundation Programs</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </article>
+
+              <article className="bg-white rounded-2xl overflow-hidden border border-[#dec5ac] flex flex-col justify-between shadow-2xs">
+                <div>
+                  <div className="aspect-[16/10] w-full overflow-hidden bg-[#f4e8dc]">
+                    <img
+                      src="/assets/sonu/hero-reception.png"
+                      alt="Student Certificate Distribution & Guest Felicitation"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-center"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <span className="inline-block px-2.5 py-0.5 rounded bg-[#f5ebe0] text-[#5e1933] text-[11px] font-semibold mb-2">
+                      Student Felicitation &amp; Guests
+                    </span>
+                    <h4 className="font-serif-luxury text-lg font-bold text-[#3f0e21] mb-1.5">
+                      Batch Completion &amp; Certificate Distribution Moments
+                    </h4>
+                    <p className="text-xs text-[#563843] leading-relaxed">
+                      Celebrating trainee dedication upon completion of their practical modules with
+                      instructors, guests, and batch peers at our Vadodara centers.
+                    </p>
+                  </div>
+                </div>
+                <div className="px-5 pb-5 pt-2 border-t border-[#f0e2d3]">
+                  <a
+                    href="#student-gallery"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#5e1933] hover:text-[#3f0e21]"
+                  >
+                    <span>View Certificate &amp; Event Gallery</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          {/* PART E: CERTIFICATES & RECOGNITION VERIFICATION POLICY (#certificates) */}
+          <div id="certificates" className="scroll-mt-24">
+            <div className="rounded-2xl bg-[#f5ebe0] border border-[#dec5ac] p-6 sm:p-8">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                <div className="lg:col-span-7">
+                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#7c2344] mb-2">
+                    <FileCheck2 className="w-4 h-4 text-[#5e1933]" />
+                    <span>Authentic Documentation &amp; Verification Policy</span>
+                  </div>
+                  <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#3f0e21] mb-2">
+                    Student Certificates &amp; Official Recognition
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#563843] leading-relaxed">
+                    Trainees completing programs under{' '}
+                    <strong>Sonu Foundation and Charitable Trust</strong> and{' '}
+                    <strong>Sonu&apos;s Beauty Academy</strong> receive course completion
+                    documentation for their batch. In accordance with our strict authenticity
+                    policy, official <strong>Government Certificate</strong> and{' '}
+                    <strong>ISO</strong> recognition details are published only from verified
+                    original documents supplied by the organization.
+                  </p>
+                </div>
+
+                <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-4 rounded-xl bg-[#faf3ec] border border-[#dec6ad]">
+                    <Award className="w-6 h-6 text-[#7c2344] mb-2" />
+                    <h4 className="font-serif-luxury text-base font-bold text-[#3f0e21] mb-1">
+                      Student &amp; Govt. Certificate Slot
+                    </h4>
+                    <p className="text-xs text-[#563843]">
+                      Reserved for verified original certificate photographs and exact registration
+                      details supplied by the client.
+                    </p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-[#faf3ec] border border-[#dec6ad]">
+                    <ShieldCheck className="w-6 h-6 text-[#7c2344] mb-2" />
+                    <h4 className="font-serif-luxury text-base font-bold text-[#3f0e21] mb-1">
+                      Recognition &amp; ISO Slot
+                    </h4>
+                    <p className="text-xs text-[#563843]">
+                      Reserved for verified accreditation documents and issuing body details
+                      supplied by the client.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          SECTION 2: SONU'S BEAUTY ACADEMY & COMPLETE 9-COURSE CATALOG
           ===================================================================== */}
       <section
         id="academy"
@@ -201,17 +812,17 @@ export const FoundationAndCoursesSection: React.FC<FoundationAndCoursesSectionPr
             <div className="lg:col-span-7 flex flex-col justify-between bg-[#faf3ec] rounded-2xl p-6 sm:p-10 border border-[#e2cbb3] shadow-xs">
               <div>
                 <p className="text-xs font-semibold tracking-widest uppercase text-[#7c2344] mb-2">
-                  Section B · Professional Beauty Education · Vadodara
+                  Professional Beauty Education Division · Vadodara
                 </p>
                 <h2 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#3f0e21] leading-tight mb-4">
-                  Sonu&apos;s Beauty Academy — Learn, Practice &amp; Grow
+                  Sonu&apos;s Beauty Academy — Professional Salon Courses
                 </h2>
                 <p className="text-[#563843] text-base leading-relaxed mb-6">
-                  At Sonu&apos;s Beauty Studio &amp; Academy, we offer structured professional
-                  training across Basic &amp; Advanced salon courses, Makeup, Hairstyles, Nails,
-                  Mehendi, Chemical treatments, PMU (Permanent Makeup), and Eyelashes. Every batch
-                  focuses on hands-on studio practice, hygiene discipline, and live client
-                  consultation.
+                  Alongside our Foundation skill programs,{' '}
+                  <strong>Sonu&apos;s Beauty Studio &amp; Academy</strong> offers specialized
+                  professional courses across Basic &amp; Advanced salon mastery, Makeup,
+                  Hairstyles, Nails, Mehendi, Chemical treatments, PMU (Permanent Makeup), and
+                  Eyelashes.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -311,7 +922,7 @@ export const FoundationAndCoursesSection: React.FC<FoundationAndCoursesSectionPr
           </div>
 
           {/* Complete 9-Course Academy Catalog */}
-          <div id="professional-courses" className="scroll-mt-24">
+          <div id="professional-courses" className="scroll-mt-24 mb-16">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-[#7c2344] mb-1">
@@ -431,440 +1042,28 @@ export const FoundationAndCoursesSection: React.FC<FoundationAndCoursesSectionPr
             </div>
           </div>
 
-          {/* SECTION 10: GOVERNMENT CERTIFICATES AND ISO RECOGNITION */}
-          <div
-            id="certificates"
-            className="mt-14 pt-12 border-t border-[#dec5ac] scroll-mt-24"
-          >
-            <div className="rounded-2xl bg-[#faf3ec] border border-[#dec5ac] p-6 sm:p-8">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-                <div className="lg:col-span-7">
-                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#7c2344] mb-2">
-                    <FileCheck2 className="w-4 h-4 text-[#5e1933]" />
-                    <span>Certificates &amp; Recognition Verification Policy</span>
-                  </div>
-                  <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#3f0e21] mb-2">
-                    Course Completion Certificates &amp; Official Recognition
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#563843] leading-relaxed">
-                    Trainees completing courses at <strong>Sonu&apos;s Beauty Academy</strong> and{' '}
-                    <strong>Sonu Foundation and Charitable Trust</strong> receive course training
-                    documentation as applicable to their batch. In accordance with our strict
-                    transparency policy, official <strong>Government Certificate</strong> and{' '}
-                    <strong>ISO</strong> recognition details—including exact issuing authority names,
-                    registration numbers, validity dates, and original certificate scans—are
-                    displayed only upon verification of original documents supplied by the business
-                    owner.
-                  </p>
-                </div>
-
-                <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="p-4 rounded-xl bg-[#f5ebe0] border border-[#dec6ad]">
-                    <Award className="w-6 h-6 text-[#7c2344] mb-2" />
-                    <h4 className="font-serif-luxury text-base font-bold text-[#3f0e21] mb-1">
-                      Government Certificate Slot
-                    </h4>
-                    <p className="text-xs text-[#563843]">
-                      Reserved for verified original certificate photograph, exact issuing body
-                      name, and certificate number once provided by the client.
-                    </p>
-                  </div>
-                  <div className="p-4 rounded-xl bg-[#f5ebe0] border border-[#dec6ad]">
-                    <ShieldCheck className="w-6 h-6 text-[#7c2344] mb-2" />
-                    <h4 className="font-serif-luxury text-base font-bold text-[#3f0e21] mb-1">
-                      ISO Recognition Slot
-                    </h4>
-                    <p className="text-xs text-[#563843]">
-                      Reserved for verified ISO certificate document, issuing organization, and
-                      validity details once provided by the client.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================================
-          SECTION 2: SONU FOUNDATION AND CHARITABLE TRUST (NGO Architecture)
-          ===================================================================== */}
-      <section
-        id="foundation"
-        className="py-16 sm:py-20 bg-[#faf3ec] border-t border-[#e5d3c0] scroll-mt-24"
-      >
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Foundation Banner */}
-          <div className="rounded-2xl bg-gradient-to-r from-[#3f0e21] via-[#5e1933] to-[#4a1228] text-[#faf3ec] p-6 sm:p-10 lg:p-12 border border-[#d4af6a]/40 mb-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-8">
-                <p className="text-xs font-semibold uppercase tracking-widest text-[#e7c98f] mb-2">
-                  Section C · Community Skill Development &amp; Vocational Training
-                </p>
-                <h2 className="font-serif-luxury text-3xl sm:text-4xl lg:text-[42px] font-bold text-white leading-tight mb-4">
-                  Sonu Foundation and Charitable Trust
-                </h2>
-                <p className="text-[#f1e2d3] text-base sm:text-lg leading-relaxed max-w-3xl">
-                  Connected with the training leadership of Sonu&apos;s Beauty Studio &amp; Academy,{' '}
-                  <strong className="text-white">Sonu Foundation and Charitable Trust</strong>{' '}
-                  conducts structured classroom and practical skill-development programs in{' '}
-                  <span className="text-[#e7c98f] font-medium">
-                    Beauty Training Classes, Stitching &amp; Tailoring Classes, and Computer Classes
-                  </span>{' '}
-                  to empower learners with practical, everyday livelihood skills.
-                </p>
-              </div>
-              <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-end">
-                <a
-                  href="#our-programs"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-[#d4af6a] hover:bg-[#e0be7c] text-[#2d0917] font-semibold text-sm transition-colors whitespace-nowrap shrink-0"
-                >
-                  <span>Explore Foundation Programs</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-                <a
-                  href="#course-enquiry"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg border border-[#e7c98f]/50 hover:bg-white/10 text-[#f7e7ce] font-semibold text-sm transition-colors whitespace-nowrap shrink-0"
-                >
-                  <span>Join Our Programs (Enquire)</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* A. About Our Foundation | B. Our Vision | C. Our Mission | D. Our Work */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
-            <div className="bg-[#f5ebe0] rounded-2xl p-6 border border-[#e2cbb3] flex flex-col justify-between">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-[#7c2344] mb-2">
-                  A. About Our Foundation
-                </p>
-                <h3 className="font-serif-luxury text-xl font-bold text-[#3f0e21] mb-2.5">
-                  Purpose &amp; Vocational Focus
-                </h3>
-                <p className="text-xs sm:text-sm text-[#563843] leading-relaxed">
-                  Sonu Foundation and Charitable Trust focuses on accessible, practical skill
-                  education for women, youth, and community learners in Vadodara across beauty
-                  services, garment tailoring, and foundational computer literacy.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-[#f5ebe0] rounded-2xl p-6 border border-[#e2cbb3] flex flex-col justify-between">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-[#7c2344] mb-2">
-                  B. Our Vision
-                </p>
-                <h3 className="font-serif-luxury text-xl font-bold text-[#3f0e21] mb-2.5">
-                  Self-Reliant Communities
-                </h3>
-                <p className="text-xs sm:text-sm text-[#563843] leading-relaxed">
-                  To foster practical skill literacy and self-reliance through structured classroom
-                  learning.{' '}
-                  <em className="text-[#7c2344] block mt-1.5 text-xs">
-                    (Official client-approved Vision statement placeholder — ready for client&apos;s
-                    exact wording.)
-                  </em>
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-[#f5ebe0] rounded-2xl p-6 border border-[#e2cbb3] flex flex-col justify-between">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-[#7c2344] mb-2">
-                  C. Our Mission
-                </p>
-                <h3 className="font-serif-luxury text-xl font-bold text-[#3f0e21] mb-2.5">
-                  Hands-On Skill Training
-                </h3>
-                <p className="text-xs sm:text-sm text-[#563843] leading-relaxed">
-                  To deliver disciplined, hands-on training in beauty care, stitching &amp;
-                  tailoring, and basic computer operations.{' '}
-                  <em className="text-[#7c2344] block mt-1.5 text-xs">
-                    (Official client-approved Mission statement placeholder — ready for client&apos;s
-                    exact wording.)
-                  </em>
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-[#f5ebe0] rounded-2xl p-6 border border-[#e2cbb3] flex flex-col justify-between">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-[#7c2344] mb-2">
-                  D. Our Work &amp; Impact
-                </p>
-                <h3 className="font-serif-luxury text-xl font-bold text-[#3f0e21] mb-2.5">
-                  Qualitative Skill Impact
-                </h3>
-                <p className="text-xs sm:text-sm text-[#563843] leading-relaxed">
-                  Through daily practical workshops, guided instructor feedback, and supportive
-                  peer batches, learners build real vocational confidence without relying on
-                  theory-only lectures.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* E. OUR TRAINING PROGRAMS (Three Dedicated Foundation Tracks) */}
-          <div id="our-programs" className="scroll-mt-24 mb-16">
-            <div className="mb-8">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#7c2344] mb-1">
-                E. Sonu Foundation and Charitable Trust · Core Skill Tracks
-              </p>
-              <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#3f0e21]">
-                Our Foundation Training Programs
-              </h3>
-              <p className="text-xs sm:text-sm text-[#563843] mt-1">
-                Three dedicated vocational training tracks. Duration, fee details, eligibility, and
-                batch timings are shared directly during admission counseling (
-                <strong>Contact for Details</strong>).
-              </p>
-            </div>
-
-            <div
-              id="training-programs"
-              className="grid grid-cols-1 lg:grid-cols-3 gap-6 scroll-mt-24"
-            >
-              {FOUNDATION_COURSES.map((prog) => {
-                const sectionAnchorId =
-                  prog.category === 'Beauty Training Classes'
-                    ? 'beauty-classes'
-                    : prog.category === 'Stitching & Tailoring Classes'
-                    ? 'stitching-classes'
-                    : 'computer-classes';
-
-                return (
-                  <article
-                    key={prog.id}
-                    id={sectionAnchorId}
-                    className="bg-white rounded-2xl overflow-hidden border border-[#dec5ac] flex flex-col justify-between shadow-2xs scroll-mt-28"
-                  >
-                    <div>
-                      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#f4e8dc]">
-                        <img
-                          src={prog.image}
-                          alt={prog.title}
-                          referrerPolicy="no-referrer"
-                          className="w-full h-full object-cover object-center"
-                        />
-                        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#5e1933]/90 text-[#f7e7ce] text-[11px] font-semibold">
-                          Sonu Foundation Program
-                        </span>
-                      </div>
-
-                      <div className="p-6">
-                        <div className="flex items-center gap-2 text-xs font-semibold text-[#7c2344] mb-1.5">
-                          {prog.category === 'Beauty Training Classes' && (
-                            <Sparkles className="w-4 h-4" />
-                          )}
-                          {prog.category === 'Stitching & Tailoring Classes' && (
-                            <Scissors className="w-4 h-4" />
-                          )}
-                          {prog.category === 'Computer Classes' && (
-                            <Monitor className="w-4 h-4" />
-                          )}
-                          <span>{prog.category}</span>
-                        </div>
-
-                        <h4 className="font-serif-luxury text-2xl font-bold text-[#3f0e21] mb-2">
-                          {prog.title}
-                        </h4>
-                        <p className="text-xs sm:text-sm text-[#563843] leading-relaxed mb-4">
-                          {prog.description}
-                        </p>
-
-                        <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-[#faf3ec] border border-[#e5d3c0] text-xs text-[#4a1228] mb-4">
-                          <div>
-                            <span className="text-[10px] text-[#7a5864] block">Duration</span>
-                            <span className="font-semibold">{prog.duration}</span>
-                          </div>
-                          <div>
-                            <span className="text-[10px] text-[#7a5864] block">Fees</span>
-                            <span className="font-semibold">{prog.fees}</span>
-                          </div>
-                          <div>
-                            <span className="text-[10px] text-[#7a5864] block">Eligibility</span>
-                            <span className="font-semibold">{prog.eligibility}</span>
-                          </div>
-                          <div>
-                            <span className="text-[10px] text-[#7a5864] block">Batch Timings</span>
-                            <span className="font-semibold">{prog.batchTimings}</span>
-                          </div>
-                        </div>
-
-                        <div className="mb-3">
-                          <p className="text-[11px] font-bold uppercase tracking-wider text-[#4a1228] mb-1.5">
-                            Proposed Topics &amp; Skills Taught:
-                          </p>
-                          <div className="space-y-1.5">
-                            {prog.modules.map((mod, idx) => (
-                              <div
-                                key={idx}
-                                className="flex items-start gap-2 text-xs text-[#563843]"
-                              >
-                                <CheckCircle2 className="w-3.5 h-3.5 text-[#5e1933] shrink-0 mt-0.5" />
-                                <span>{mod}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="px-6 pb-6 pt-3 border-t border-[#f0e2d3] flex items-center justify-between gap-2">
-                      <button
-                        type="button"
-                        onClick={() => handleSelectCourseAndScroll(prog.id)}
-                        className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-[#5e1933] hover:bg-[#4a1228] text-white text-xs font-semibold transition-colors cursor-pointer"
-                      >
-                        <span>Enquire for Program</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setActiveCourseModal(prog)}
-                        className="inline-flex items-center justify-center gap-1 px-3 py-2.5 rounded-lg border border-[#d5bda4] hover:bg-[#faf3ec] text-[#4a1228] text-xs font-semibold transition-colors cursor-pointer"
-                      >
-                        <BookOpen className="w-3.5 h-3.5" />
-                        <span>Details</span>
-                      </button>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* F. STUDENT DEVELOPMENT & G. STUDENT SUCCESS STORIES & H. QUALITATIVE IMPACT */}
-          <div
-            id="student-stories"
-            className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16 scroll-mt-24"
-          >
-            <div className="lg:col-span-6 bg-[#f5ebe0] rounded-2xl p-6 sm:p-8 border border-[#e2cbb3] flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#7c2344] mb-2">
-                  <Users className="w-4 h-4 text-[#5e1933]" />
-                  <span>F. Student Development &amp; H. Our Impact</span>
-                </div>
-                <h3 className="font-serif-luxury text-2xl font-bold text-[#3f0e21] mb-3">
-                  Practical Classroom Development &amp; Qualitative Impact
-                </h3>
-                <p className="text-xs sm:text-sm text-[#563843] leading-relaxed mb-4">
-                  Every batch at Sonu Foundation and Charitable Trust is structured around
-                  step-by-step demonstrations followed by supervised individual practice:
-                </p>
-                <ul className="space-y-2.5 text-xs sm:text-sm text-[#4a1228] mb-6">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#5e1933] shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Beauty Training Learners:</strong> Practice threading symmetry,
-                      waxing hygiene, facial strokes, hair styling, and bridal/festive makeup setup.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#5e1933] shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Stitching &amp; Tailoring Learners:</strong> Progress from basic hand
-                      stitches and sewing machine control to garment drafting, cutting, and neat
-                      finishing.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#5e1933] shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Computer Literacy Learners:</strong> Gain everyday confidence in
-                      desktop operations, MS Word documents, MS Excel tables, MS PowerPoint slides,
-                      and internet skills.
-                    </span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-[#dec6ad]">
-                <a
-                  href="#student-gallery"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white border border-[#d5bda4] text-xs font-semibold text-[#3f0e21] hover:bg-[#efe1d1]"
-                >
-                  <span>View Student &amp; Classroom Gallery</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-                <a
-                  href="#course-enquiry"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#5e1933] text-xs font-semibold text-white hover:bg-[#4a1228]"
-                >
-                  <span>Join Our Programs</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-
-            <div className="lg:col-span-6 bg-[#f5ebe0] rounded-2xl p-6 sm:p-8 border border-[#e2cbb3] flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#7c2344] mb-2">
-                  <HeartHandshake className="w-4 h-4 text-[#5e1933]" />
-                  <span>G. Student Stories &amp; Trainee Reflections</span>
-                </div>
-                <h3 className="font-serif-luxury text-2xl font-bold text-[#3f0e21] mb-3">
-                  Learner Experiences &amp; Skill Journey
-                </h3>
-                <p className="text-xs text-[#684752] mb-4">
-                  We share only verified trainee experiences approved by our students and client:
-                </p>
-
-                <div className="space-y-3.5">
-                  <div className="p-4 rounded-xl bg-white border border-[#e2cbb3]">
-                    <p className="text-xs sm:text-sm text-[#4a1228] leading-relaxed mb-2">
-                      &ldquo;Learning basic beauty, threading, and bridal makeup steps in a real
-                      studio setting helped me understand both client hygiene and practical
-                      application.&rdquo;
-                    </p>
-                    <p className="text-xs font-bold text-[#5e1933]">
-                      — Beauty &amp; Makeup Batch Trainee · Vadodara
-                    </p>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-white border border-[#e2cbb3]">
-                    <p className="text-xs sm:text-sm text-[#4a1228] leading-relaxed mb-2">
-                      &ldquo;Our stitching and tailoring classes start from sewing machine
-                      threading and paper drafting, making it easy for beginners to learn garment
-                      cutting step by step.&rdquo;
-                    </p>
-                    <p className="text-xs font-bold text-[#5e1933]">
-                      — Stitching &amp; Tailoring Batch Learner · Sonu Foundation
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <p className="text-[11px] text-[#6e4d59] mt-4 pt-3 border-t border-[#dec6ad]">
-                Additional named student stories and video interviews are published as approved by
-                individual trainees and Sonu Foundation and Charitable Trust.
-              </p>
-            </div>
-          </div>
-
           {/* =====================================================================
-              SECTION 15: COURSE ENQUIRY FORM (With Course Category + Branch Selection)
+              SECTION 3: UNIFIED PROGRAM & COURSE ENQUIRY FORM
               ===================================================================== */}
           <div
             id="course-enquiry"
-            className="scroll-mt-24 rounded-2xl bg-[#f4e8dc] border border-[#dec5ac] p-6 sm:p-10"
+            className="scroll-mt-24 rounded-2xl bg-[#faf3ec] border border-[#dec5ac] p-6 sm:p-10 shadow-xs"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               <div className="lg:col-span-5">
                 <p className="text-xs font-semibold uppercase tracking-widest text-[#7c2344] mb-2">
-                  Admissions &amp; Batch Counseling
+                  Sonu Foundation &amp; Beauty Academy Admissions
                 </p>
                 <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#3f0e21] mb-3">
-                  Course Enquiry Form
+                  Program &amp; Course Enquiry Form
                 </h3>
                 <p className="text-sm text-[#563843] leading-relaxed mb-6">
-                  Enquire about any of the 9 <strong>Sonu&apos;s Beauty Academy</strong> courses or
-                  the 3 <strong>Sonu Foundation and Charitable Trust</strong> training programs
-                  (Beauty, Stitching &amp; Tailoring, and Computer Classes).
+                  Enquire about our 3 <strong>Sonu Foundation and Charitable Trust</strong> skill
+                  programs (Beauty Training, Stitching &amp; Tailoring, and Computer Classes) or any
+                  of the 9 <strong>Sonu&apos;s Beauty Academy</strong> professional courses.
                 </p>
 
-                <div className="space-y-3 text-sm text-[#4a1228] bg-[#faf3ec] p-5 rounded-xl border border-[#e2cbb3]">
+                <div className="space-y-3 text-sm text-[#4a1228] bg-[#f4e8dc] p-5 rounded-xl border border-[#e2cbb3]">
                   <p className="font-serif-luxury font-bold text-base text-[#3f0e21]">
                     Direct Training &amp; Counseling Desk
                   </p>
@@ -884,14 +1083,14 @@ export const FoundationAndCoursesSection: React.FC<FoundationAndCoursesSectionPr
                     <a
                       href={buildWhatsAppUrl(
                         BRAND_CONTACT.whatsappNumber,
-                        'Hello Sonu’s Beauty Academy & Sonu Foundation, I would like to enquire about course admissions, fees, and batch timings.'
+                        'Hello Sonu Foundation & Sonu’s Beauty Academy, I would like to enquire about training programs, fees, and batch timings.'
                       )}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs font-semibold transition-colors whitespace-nowrap shrink-0"
                     >
                       <MessageCircle className="w-4 h-4" />
-                      <span>WhatsApp Course Enquiry</span>
+                      <span>WhatsApp Program Enquiry</span>
                     </a>
                   </div>
                 </div>
@@ -1231,7 +1430,7 @@ export const FoundationAndCoursesSection: React.FC<FoundationAndCoursesSectionPr
               <a
                 href={buildWhatsAppUrl(
                   BRAND_CONTACT.whatsappNumber,
-                  `Hello Sonu's Beauty Academy, I would like to enquire about the ${activeCourseModal.title}.`
+                  `Hello Sonu Foundation & Beauty Academy, I would like to enquire about the ${activeCourseModal.title}.`
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
